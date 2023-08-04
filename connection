@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import LoginForm from "./components/pets/LoginForm";
 import BondsPage from "./components/pets/BondsPage";
 
+// Define the function outside the App component
 function fetchDataFromBackend() {
   fetch("http://localhost:3000/securities")
     .then(response => response.json())
     .then(data => {
-      //
+      // Do something with the data received from the server
       console.log(data);
     })
     .catch(error => {
@@ -26,7 +27,7 @@ function App() {
           <BondsPage />
         )}
       </div>
-</div>
+    </div>
   );
 }
 
