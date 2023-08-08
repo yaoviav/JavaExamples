@@ -1,28 +1,28 @@
 import React from 'react'
 import Row from 'react-bootstrap/Row'
-import { getAllBonds } from '../../services/BondsServices';
+import { getAllTrades } from '../../services/BondsServices';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
 
-const BondsPage = () => {
-  const [bonds, setBonds] = useState([]);
+const TradesPage = () => {
+  const [trades, setTrades] = useState([]);
   
 
   useEffect(() => {
-    getBondsFromAPI();
+    getTradesFromAPI();
     }, []
     );
 
-const getBondsFromAPI = () => {
-    getAllBonds()
+const getTradesFromAPI = () => {
+    getAllTrades()
         .then(res => {
-            setBonds(res.data);
+            setTrades(res.data);
             console.log(res.data);
         })
         
         .catch(err => {
-            setBonds([]);
+            setTrades([]);
             console.log(err);
         })
       }
@@ -31,36 +31,36 @@ const getBondsFromAPI = () => {
 
 <Row >
     <div>
-      <h1>Security Table</h1>
+      <h1>Trades Table</h1>
       <table>
         <thead>
-
           <tr>
             <th>ID</th>
-            <th>ISIN</th>
-            <th>CUSIP</th>
-            <th>issuer_name</th>
-            <th>maturity_date</th>
-            <th>coupon</th>
-            <th>type</th>
-            <th>face_value</th>
-            <th>currency</th>
-            <th>status</th>
+            <th>BOOK_ID</th>
+            <th>SECURITY_ID</th>
+            <th>COUNTERPARTY_ID</th>
+            <th>CURRENCY</th>
+            <th>STATUS</th>
+            <th>QUANTITY</th>
+            <th>UNIT_PRICE</th>
+            <th>BUY_SELL</th>
+            <th>TRADE_DATE</th>
+            <th>SETTLEMENT_DATE</th>
           </tr>
         </thead>
         <tbody>
-          {bonds.map(bond=>(
-            <tr key={bond.id}>
-              <td>{bond.id}</td>
-              <td>{bond.ISIN}</td>
-              <td>{bond.CUSIP}</td>
-              <td>{bond.issuer_name}</td>
-              <td>{bond.maturity_date}</td>
-              <td>{bond.coupon}</td>
-              <td>{bond.type}</td>
-              <td>{bond.face_value}</td>
-              <td>{bond.currency}</td>
-              <td>{bond.status}</td>
+          {trades.map(trade=>(
+            <tr key={trade.id}>
+              <td>{trade.BOOK_ID}</td>
+              <td>{trade.SECURITY_ID}</td>
+              <td>{trade.COUNTERPARTY_ID}</td>
+              <td>{trade.CURRENCY}</td>
+              <td>{trade.STATUS}</td>
+              <td>{trade.QUANTITY}</td>
+              <td>{trade.UNIT_PRICE}</td>
+              <td>{trade.BUY_SELL}</td>
+              <td>{trade.TRADE_DATE}</td>
+              <td>{trade.SETTLEMENT_DATE}</td>
             </tr>
           ))}
         </tbody>
@@ -73,4 +73,4 @@ const getBondsFromAPI = () => {
   )
 }
 
-export default BondsPage
+export default TradesPage
